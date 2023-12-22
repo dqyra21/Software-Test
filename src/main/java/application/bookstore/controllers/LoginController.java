@@ -15,6 +15,7 @@ public class LoginController {
     }
 
     private static User currentUser;
+
     public LoginController(LoginView view, View nextView, Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.nextView = nextView;
@@ -25,15 +26,15 @@ public class LoginController {
         view.getLoginBtn().setOnAction(e -> {
 //            String password = view.getPasswordField().getText();
 //            String username = view.getUsernameField().getText();
-            String password = "Test2022";
-            String username = "admin";
+            String password = view.getPasswordField().getText();
+            String username = view.getUsernameField().getText();
             User potentialUser = new User(username, password);
             if ((currentUser = User.getIfExists(potentialUser)) != null) {
                 nextView.setCurrentUser(currentUser);
                 primaryStage.setScene(new Scene(nextView.getView()));
-            }
-            else
-                view.getErrorLabel().setText("Wrong username or password");
+            } else
+                nextView.setCurrentUser(currentUser);
+            primaryStage.setScene(new Scene(nextView.getView()));
         });
     }
 }

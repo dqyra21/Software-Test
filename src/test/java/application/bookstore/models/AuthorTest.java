@@ -6,49 +6,100 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 
 class AuthorTest {
 
   /**
-   * testing search method by creating a temporary Array for testing and comparing it with the search result from the actual method
+   * testing search method by creating a temporary Array for testing and comparing
+   * it with the search result from the actual method
    */
   @Test
   void testGetSearchResults() {
     ArrayList<Author> test = new ArrayList<>();
-    Author newAuthor = new Author("Ismail","Kadare");
+    Author newAuthor = new Author("Ismail", "Kadare");
     test.add(newAuthor);
     ArrayList<Author> actualSearchResults = Author.getSearchResults("Ismail Kadare");
     assertEquals(test.toString(), actualSearchResults.toString());
     System.out.println(actualSearchResults);
   }
 
-  /**
-   * test save method
-   */
+  @Test
+  void testGetSearchResults2() {
+    ArrayList<Author> actualSearchResults = Author.getSearchResults("Search Text");
+    assertTrue(actualSearchResults.isEmpty());
+  }
+
+  @Test
+  void testGetSearchResults4() {
+    ArrayList<Author> actualSearchResults = Author.getSearchResults("Ismail Kadare");
+    assertEquals(1, actualSearchResults.size());
+  }
+
+  @Test
+  void testSetFirstName() {
+    (new Author("test", "test")).setFirstName("test");
+  }
+
+  @Test
+  void testSetLastName() {
+    (new Author("test", "test")).setLastName("test");
+  }
+
+  @Test
+  void testGetFullName() {
+    assertEquals("test test", (new Author("test", "test")).getFullName());
+  }
+
+  @Test
+  void testNewAuthor() {
+    // Arrange and Act
+    Author actualAuthor = new Author("test", "test");
+
+    // Assert
+    assertEquals("test", actualAuthor.getLastName());
+    assertEquals("test", actualAuthor.getFirstName());
+  }
+
   @Test
   void testSaveInFile() {
-    Author test = new Author("testSave","LastNameTest");
+    Author test = new Author("testSave", "LastNameTest");
     assertTrue(test.saveInFile());
-    assertFalse((new Author("Jane", "")).saveInFile());
+    assertFalse((new Author("test", "")).saveInFile());
+  }
+
+  @Test
+  void testSaveInFile2() {
+    assertFalse((new Author("", "test")).saveInFile());
+  }
+
+  @Test
+  void testSaveInFile3() {
+    assertFalse((new Author("test", "")).saveInFile());
   }
 
   /**
-   * test isvalid method to check if a Author is valid also included some cases when it is not
+   * test isvalid method to check if an Author is valid also included some cases
+   * when it is not
    */
   @Test
   void testIsValid() {
     assertTrue((new Author("Ismail", "Kadare")).isValid());
-    assertFalse((new Author("", "Doe")).isValid());
-    assertFalse((new Author("Jane", "")).isValid());
+    assertFalse((new Author("", "test")).isValid());
+    assertFalse((new Author("test", "")).isValid());
   }
 
   /**
    * test delete method
    */
+
   @Test
-  void testDeleteFromFile() {
-    assertTrue((new Author("Jane", "Doe")).deleteFromFile());
+  void testDeleteFromFile2() {
+    (new Author("testDelete", "testDelete")).deleteFromFile();
+    ArrayList<Author> actualSearchResults = Author.getSearchResults("testDelete testDelete");
+    assertTrue(actualSearchResults.isEmpty());
   }
 
   /**

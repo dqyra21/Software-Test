@@ -9,16 +9,23 @@ import application.bookstore.models.Role;
 import application.bookstore.models.User;
 import application.bookstore.views.LoginView;
 import application.bookstore.views.MainView;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 class MainIntegrationTest extends ApplicationTest {
+    Lock lock = new ReentrantLock();
+    Condition condition = lock.newCondition();
     private static void seedData() {
         User admin = new User("admin", "Test2022", Role.ADMIN);
         User manager = new User("manager", "Test2022", Role.MANAGER);
@@ -53,7 +60,6 @@ class MainIntegrationTest extends ApplicationTest {
     }
     @Test
     public void testAdminLogIn () throws InterruptedException {
-
         await().until(() -> lookup("#usernameLabel").query() != null);
         clickOn("#usernameLabel");
         write("admin");
@@ -61,13 +67,28 @@ class MainIntegrationTest extends ApplicationTest {
         clickOn("#passwordLabel");
         write("Test2022");
         clickOn("#loginBtn");
+        //The following Tabs should only be visible in admin login thus if they exist we are logged in as admin
         verifyThat("#authorTab", isVisible());
+        verifyThat("#bookTab", isVisible());
+        verifyThat("#salesTab", isVisible());
+        //create author
         clickOn("#firstNameLabel");
         write("testFX");
         clickOn("#lastNameLabel");
         write("testFX");
         clickOn("#saveBtn");
         verifyThat("#resultLabel", hasText("Author created successfully!"));
+        //delete author
+        FxRobot fxRobot = new FxRobot();
+        fxRobot.clickOn((Node) fxRobot.lookup("#tableView").query().lookup(".table-row-cell"));
+        sleep(1000);
+        clickOn("#deleteBtn");
+        verifyThat("#resultLabel", hasText("Authors deleted successfully!"));
+        sleep(5000);
+        //move to book tab
+        clickOn("#bookTab");
+        clickOn("#isbnLabel");
+        
 
     }
 }

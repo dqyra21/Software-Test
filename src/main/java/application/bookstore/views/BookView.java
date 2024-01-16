@@ -127,15 +127,20 @@ public class BookView extends View{
         formPane.setAlignment(Pos.CENTER);
         //vendosja e fushave per plotesimin e te dhenave te librit
         Label isbnLabel = new Label("ISBN: ", isbnField);
+        isbnLabel.setId("isbnLabel");
         isbnLabel.setContentDisplay(ContentDisplay.TOP);
 
         Label titleLabel = new Label("Title: ", titleField);
+        titleLabel.setId("titleLabel");
         titleLabel.setContentDisplay(ContentDisplay.TOP);
         Label purchasedPriceLabel = new Label("Purchased price", purchasedPriceField);
+        purchasedPriceLabel.setId("purchasedPriceLabel");
         purchasedPriceLabel.setContentDisplay(ContentDisplay.TOP);
         Label sellingPriceLabel = new Label("Selling price", sellingPriceField);
+        sellingPriceLabel.setId("sellingPriceLabel");
         sellingPriceLabel.setContentDisplay(ContentDisplay.TOP);
         Label quantityLabel = new Label("Quantity", quantityField);
+        quantityLabel.setId("quantityLabel");
         quantityLabel.setContentDisplay(ContentDisplay.TOP);
         Label authorLabel = new Label("Author", authorsComboBox);
         authorsComboBox.getItems().setAll(Author.getAuthors());
@@ -143,8 +148,9 @@ public class BookView extends View{
         if (!Author.getAuthors().isEmpty())
             authorsComboBox.setValue(Author.getAuthors().get(0));
         authorLabel.setContentDisplay(ContentDisplay.TOP);
+        saveBtn.setId("saveBookBtn");
         formPane.getChildren().addAll(isbnLabel, titleLabel, purchasedPriceLabel, sellingPriceLabel, quantityLabel,
-                                        authorLabel, saveBtn, deleteBtn, editBtn);
+                                        authorLabel, saveBtn);
     }
 
     private void setTableView() {
@@ -188,13 +194,13 @@ public class BookView extends View{
     }
     @Override
     public Parent getView() {
+        resultLabel.setId("resultLabelBook");
         borderPane.setCenter(tableView);
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(5);
         vBox.getChildren().addAll(formPane, resultLabel);
         borderPane.setBottom(vBox);
-        borderPane.setTop(searchView.getSearchPane());
         return borderPane;
     }
 }

@@ -54,7 +54,6 @@ public class ManagerView extends View {
         vBox.setSpacing(5);
         vBox.getChildren().addAll(formPane, resultLabel);
         borderPane.setBottom(vBox);
-        borderPane.setTop(searchView.getSearchPane());
         return borderPane;
     }
 

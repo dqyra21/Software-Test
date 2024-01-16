@@ -56,6 +56,7 @@ public class AuthorView extends View{
         return tableView;
     }
 
+
     public TextField getFirstNameField() {
         return firstNameField;
     }
@@ -99,6 +100,8 @@ public class AuthorView extends View{
         lastNameLabel.setId("lastNameLabel");
         lastNameLabel.setContentDisplay(ContentDisplay.TOP);
         saveBtn.setId("saveBtn");
+        deleteBtn.setId("deleteBtn");
+        editBtn.setId("editBtn");
         formPane.getChildren().addAll(firstNameLabel, lastNameLabel, saveBtn, deleteBtn, editBtn);
     }
 
@@ -107,6 +110,7 @@ public class AuthorView extends View{
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView.setEditable(true);
         tableView.setItems(FXCollections.observableArrayList(Author.getAuthors()));
+        tableView.setId("tableView");
         firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<>("firstName")
         );

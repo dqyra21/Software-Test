@@ -34,9 +34,7 @@ public class LoginController {
                 if ((currentUser = User.getIfExists(potentialUser)) != null) {
                     nextView.setCurrentUser(currentUser);
                     primaryStage.setScene(new Scene(nextView.getView()));
-                } else
-                    nextView.setCurrentUser(currentUser);
-                primaryStage.setScene(new Scene(nextView.getView()));
+                }
             }catch (Exception x){
                 new Alert(Alert.AlertType.ERROR,"Wrong credentials, try again :)").show();
             }

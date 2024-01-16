@@ -10,7 +10,7 @@ public class User extends BaseModel implements Serializable {
     private Role role;
     public static final String FILE_PATH = "./src/main/resources/data/users.ser";
     private static final File DATA_FILE = new File(FILE_PATH);
-
+    @Serial
     private static final long serialVersionUID = 1234567L;
     public User() {}
 

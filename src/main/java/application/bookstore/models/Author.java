@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Author extends BaseModel implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1234567L;
     private String firstName;
 

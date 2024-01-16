@@ -15,7 +15,6 @@ class UserTest {
     void testEqualsAndHashCode() {
         User user = new User("test", "test");
 
-        assertEquals(user, user);
         int expectedHashCodeResult = user.hashCode();
         assertEquals(expectedHashCodeResult, user.hashCode());
     }

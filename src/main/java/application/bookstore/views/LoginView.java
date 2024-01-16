@@ -38,7 +38,10 @@ public class LoginView extends View {
 
     private void setView() {
         Label usernameLabel = new Label("Username", usernameField);
+        usernameLabel.setId("usernameLabel");
         Label passwordLabel = new Label("Password", passwordField);
+        passwordLabel.setId("passwordLabel");
+        loginBtn.setId("loginBtn");
         VBox vBox = new VBox();
         Label loginLabel = new Label("LOGIN");
         vBox.getChildren().addAll(loginLabel, usernameLabel, passwordLabel, loginBtn, errorLabel);

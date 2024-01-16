@@ -76,11 +76,13 @@ public class AuthorView extends View{
 
     @Override
     public Parent getView() {
+
         borderPane.setCenter(tableView);
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(5);
         vBox.getChildren().addAll(formPane, resultLabel);
+        resultLabel.setId("resultLabel");
         borderPane.setBottom(vBox);
         borderPane.setTop(searchView.getSearchPane());
         return borderPane;
@@ -91,9 +93,12 @@ public class AuthorView extends View{
         formPane.setSpacing(20);
         formPane.setAlignment(Pos.CENTER);
         Label firstNameLabel = new Label("First name: ", firstNameField);
+        firstNameLabel.setId("firstNameLabel");
         firstNameLabel.setContentDisplay(ContentDisplay.TOP);
         Label lastNameLabel = new Label("Last name: ", lastNameField);
+        lastNameLabel.setId("lastNameLabel");
         lastNameLabel.setContentDisplay(ContentDisplay.TOP);
+        saveBtn.setId("saveBtn");
         formPane.getChildren().addAll(firstNameLabel, lastNameLabel, saveBtn, deleteBtn, editBtn);
     }
 

@@ -4,6 +4,7 @@ import application.bookstore.models.User;
 import application.bookstore.views.LoginView;
 import application.bookstore.views.View;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -29,12 +30,16 @@ public class LoginController {
             String password = view.getPasswordField().getText();
             String username = view.getUsernameField().getText();
             User potentialUser = new User(username, password);
-            if ((currentUser = User.getIfExists(potentialUser)) != null) {
-                nextView.setCurrentUser(currentUser);
+            try {
+                if ((currentUser = User.getIfExists(potentialUser)) != null) {
+                    nextView.setCurrentUser(currentUser);
+                    primaryStage.setScene(new Scene(nextView.getView()));
+                } else
+                    nextView.setCurrentUser(currentUser);
                 primaryStage.setScene(new Scene(nextView.getView()));
-            } else
-                nextView.setCurrentUser(currentUser);
-            primaryStage.setScene(new Scene(nextView.getView()));
+            }catch (Exception x){
+                new Alert(Alert.AlertType.ERROR,"Wrong credentials, try again :)").show();
+            }
         });
     }
 }

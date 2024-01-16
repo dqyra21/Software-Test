@@ -16,48 +16,48 @@ public class SalesController {
         //setSaveListener();
     }
 
-//    private void setSaveListener() {
-//
-//        salesView.getAddBtn().setOnAction(e -> {
-//            String isbn = salesView.getIsbnField().getText();
-//            boolean exist = false;
-//            int index = -1;
-//            int quantity = 0;
-//            for (Book b : salesView.getTableView().getItems()) {
-//                index++;
-//                if (isbn.equals(b.getIsbn())) {
-//                    quantity = b.getQuantity();
-//                    exist = true;
-//                    break;
-//                }
-//            }
-//            if (exist) {
-//                if (Integer.parseInt(salesView.getQuantityField().getText()) > 0) {
-//                    quantity = quantity + Integer.parseInt(salesView.getQuantityField().getText());
-//                    salesView.getTableView().getItems().get(index).setQuantity(quantity);
-//                    try {
-//                        deleteFileContent("./src/main/resources/data/books.ser");
-//                        for (Book b : salesView.getTableView().getItems()) {
-//                            b.saveInFile();
-//                        }
-//                    } catch (FileNotFoundException fileNotFoundException) {
-//                        fileNotFoundException.printStackTrace();
-//                    }
-//                    salesView.getResultLabel().setText("Quantity updated!");
-//                    salesView.getResultLabel().setTextFill(Color.DARKGREEN);
-//
-//                } else {
-//                    salesView.getResultLabel().setText("Invalid Quantity!");
-//                    salesView.getResultLabel().setTextFill(Color.DARKRED);
-//                }
-//                resetFields();
-//            } else {
-//                salesView.getResultLabel().setText("Wrong ISBN!!");
-//                salesView.getResultLabel().setTextFill(Color.DARKRED);
-//            }
-//            salesView.getTableView().refresh();
-//        });
-//    }
+    private void setSaveListener() {
+
+        salesView.getAddBtn().setOnAction(e -> {
+            String isbn = salesView.getIsbnField().getText();
+            boolean exist = false;
+            int index = -1;
+            int quantity = 0;
+            for (Book b : salesView.getTableView().getItems()) {
+                index++;
+                if (isbn.equals(b.getIsbn())) {
+                    quantity = b.getQuantity();
+                    exist = true;
+                    break;
+                }
+            }
+            if (exist) {
+                if (Integer.parseInt(salesView.getQuantityField().getText()) > 0) {
+                    quantity = quantity + Integer.parseInt(salesView.getQuantityField().getText());
+                    salesView.getTableView().getItems().get(index).setQuantity(quantity);
+                    try {
+                        deleteFileContent("./src/main/resources/data/books.ser");
+                        for (Book b : salesView.getTableView().getItems()) {
+                            b.saveInFile();
+                        }
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    }
+                    salesView.getResultLabel().setText("Quantity updated!");
+                    salesView.getResultLabel().setTextFill(Color.DARKGREEN);
+
+                } else {
+                    salesView.getResultLabel().setText("Invalid Quantity!");
+                    salesView.getResultLabel().setTextFill(Color.DARKRED);
+                }
+                resetFields();
+            } else {
+                salesView.getResultLabel().setText("Wrong ISBN!!");
+                salesView.getResultLabel().setTextFill(Color.DARKRED);
+            }
+            salesView.getTableView().refresh();
+        });
+    }
 
     private void resetFields() {
         salesView.getIsbnField().setText("");

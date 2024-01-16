@@ -17,6 +17,7 @@ public class MainView extends View {
         BorderPane borderPane = new BorderPane();
         TabPane tabPane = new TabPane();
         Tab authorTab = new Tab("Authors");
+        authorTab.setId("authorTab");
         authorTab.setContent(new AuthorView().getView());
         Tab bookTab = new Tab("Books");
         bookTab.setContent(new BookView().getView());
@@ -24,12 +25,17 @@ public class MainView extends View {
         librarianTab.setContent(new LibrarianView().getView());
         Tab managerTab = new Tab("Manager");
         managerTab.setContent(new ManagerView().getView());
+        Tab salesTab = new Tab("Sales");
+        salesTab.setContent(new SalesView().getView());
+
         Role currentRole = (getCurrentUser() != null ? getCurrentUser().getRole() : null);
         if (currentRole != null) {
             if (currentRole == Role.ADMIN)
                 tabPane.getTabs().addAll(authorTab, bookTab);
-            if (currentRole == Role.MANAGER || currentRole == Role.ADMIN)
-                tabPane.getTabs().addAll(managerTab); //tabPane.getTabs().addAll(managerTab, salesTab);
+            if (currentRole == Role.MANAGER || currentRole == Role.ADMIN) {
+                tabPane.getTabs().addAll(managerTab);
+                tabPane.getTabs().addAll(managerTab, salesTab);
+            }
             tabPane.getTabs().add(librarianTab);
         }
         borderPane.setTop(tabPane);

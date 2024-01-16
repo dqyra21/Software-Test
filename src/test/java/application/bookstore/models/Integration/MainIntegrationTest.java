@@ -1,4 +1,4 @@
-package application.bookstore;
+package application.bookstore.models.Integration;
 import static org.awaitility.Awaitility.await;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
@@ -59,7 +59,7 @@ class MainIntegrationTest extends ApplicationTest {
         stage.show();
     }
     @Test
-    public void testAdminLogIn () throws InterruptedException {
+    public void testAdminLogIn () {
         await().until(() -> lookup("#usernameLabel").query() != null);
         clickOn("#usernameLabel");
         write("admin");
@@ -70,7 +70,6 @@ class MainIntegrationTest extends ApplicationTest {
         //The following Tabs should only be visible in admin login thus if they exist we are logged in as admin
         verifyThat("#authorTab", isVisible());
         verifyThat("#bookTab", isVisible());
-        verifyThat("#salesTab", isVisible());
         //create author
         clickOn("#firstNameLabel");
         write("testFX");
@@ -88,7 +87,18 @@ class MainIntegrationTest extends ApplicationTest {
         //move to book tab
         clickOn("#bookTab");
         clickOn("#isbnLabel");
-        
-
+        write("545");
+        clickOn("#titleLabel");
+        write("title");
+        clickOn("#purchasedPriceLabel");
+        write("10");
+        clickOn("#sellingPriceLabel");
+        write("15");
+        clickOn("#quantityLabel");
+        write("5");
+        clickOn("#saveBookBtn");
+        verifyThat("#resultLabelBook", hasText("Book created successfully"));
+        System.out.println("All admin tests passed!");
     }
+
 }

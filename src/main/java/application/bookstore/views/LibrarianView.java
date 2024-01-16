@@ -51,6 +51,7 @@ public class LibrarianView extends View {
 
     @Override
     public Parent getView() {
+        resultLabel.setId("LibResultLabel");
         borderPane.setCenter(tableView);
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
@@ -65,9 +66,12 @@ public class LibrarianView extends View {
         formPane.setSpacing(20);
         formPane.setAlignment(Pos.CENTER);
         Label isbnLabel = new Label("ISBN: ", isbnField);
+        isbnLabel.setId("LibIsbn");
         isbnLabel.setContentDisplay(ContentDisplay.TOP);
         Label quantityLabel = new Label("Quantity", quantityField);
+        quantityLabel.setId("LibQuantity");
         quantityLabel.setContentDisplay(ContentDisplay.TOP);
+        purchaseBtn.setId("purchaseBtn");
         formPane.getChildren().addAll(isbnLabel, quantityLabel, purchaseBtn);
     }
 

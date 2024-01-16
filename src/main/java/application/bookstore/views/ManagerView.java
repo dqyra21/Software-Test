@@ -48,6 +48,8 @@ public class ManagerView extends View {
 
     @Override
     public Parent getView() {
+        resultLabel.setId("ManagerResultLabel");
+        tableView.setId("managerTab");
         borderPane.setCenter(tableView);
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
@@ -62,9 +64,12 @@ public class ManagerView extends View {
         formPane.setSpacing(20);
         formPane.setAlignment(Pos.CENTER);
         Label isbnLabel = new Label("ISBN: ", isbnField);
+        isbnLabel.setId("managerIsbn");
         isbnLabel.setContentDisplay(ContentDisplay.TOP);
         Label quantityLabel = new Label("Quantity", quantityField);
+        quantityLabel.setId("managerQuantity");
         quantityLabel.setContentDisplay(ContentDisplay.TOP);
+        addBtn.setId("addBtn");
         formPane.getChildren().addAll(isbnLabel, quantityLabel, addBtn);
     }
 

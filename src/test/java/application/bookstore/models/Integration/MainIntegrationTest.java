@@ -100,5 +100,46 @@ class MainIntegrationTest extends ApplicationTest {
         verifyThat("#resultLabelBook", hasText("Book created successfully"));
         System.out.println("All admin tests passed!");
     }
+    @Test
+    public void testManagerLogIn () {
+        await().until(() -> lookup("#usernameLabel").query() != null);
+        clickOn("#usernameLabel");
+        write("manager");
+        await().until(() -> lookup("#passwordLabel").query() != null);
+        clickOn("#passwordLabel");
+        write("Test2022");
+        clickOn("#loginBtn");
+        verifyThat("#salesTab", isVisible());
+        //create author
+        clickOn("#managerIsbn");
+        write("111");
+        clickOn("#managerQuantity");
+        write("8");
+        clickOn("#addBtn");
+        verifyThat("#ManagerResultLabel", hasText("Quantity updated!"));
+        //delete author
+        System.out.println("All manager tests passed!");
+    }
+
+    @Test
+    public void testLibrarianLogIn () {
+        await().until(() -> lookup("#usernameLabel").query() != null);
+        clickOn("#usernameLabel");
+        write("librarian");
+        await().until(() -> lookup("#passwordLabel").query() != null);
+        clickOn("#passwordLabel");
+        write("Test2022");
+        clickOn("#loginBtn");
+        //create author
+        clickOn("#LibIsbn");
+        write("111");
+        clickOn("#LibQuantity");
+        write("1");
+        clickOn("#purchaseBtn");
+        verifyThat("#LibResultLabel", hasText("Invoice generated successfully!"));
+        //delete author
+        System.out.println("All librarian tests passed!");
+    }
+
 
 }

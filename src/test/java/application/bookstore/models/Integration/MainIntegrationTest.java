@@ -15,17 +15,17 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
+
+@TestMethodOrder(MethodOrderer.MethodName.class)
 class MainIntegrationTest extends ApplicationTest {
-    Lock lock = new ReentrantLock();
-    Condition condition = lock.newCondition();
     private static void seedData() {
         User admin = new User("admin", "Test2022", Role.ADMIN);
         User manager = new User("manager", "Test2022", Role.MANAGER);
@@ -87,7 +87,7 @@ class MainIntegrationTest extends ApplicationTest {
         //move to book tab
         clickOn("#bookTab");
         clickOn("#isbnLabel");
-        write("545");
+        write("111");
         clickOn("#titleLabel");
         write("title");
         clickOn("#purchasedPriceLabel");
@@ -98,7 +98,7 @@ class MainIntegrationTest extends ApplicationTest {
         write("5");
         clickOn("#saveBookBtn");
         verifyThat("#resultLabelBook", hasText("Book created successfully"));
-        System.out.println("All admin tests passed!");
+
     }
     @Test
     public void testManagerLogIn () {
@@ -118,7 +118,7 @@ class MainIntegrationTest extends ApplicationTest {
         clickOn("#addBtn");
         verifyThat("#ManagerResultLabel", hasText("Quantity updated!"));
         //delete author
-        System.out.println("All manager tests passed!");
+
     }
 
     @Test
@@ -138,7 +138,7 @@ class MainIntegrationTest extends ApplicationTest {
         clickOn("#purchaseBtn");
         verifyThat("#LibResultLabel", hasText("Invoice generated successfully!"));
         //delete author
-        System.out.println("All librarian tests passed!");
+
     }
 
 

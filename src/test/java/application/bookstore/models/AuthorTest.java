@@ -21,6 +21,11 @@ class AuthorTest {
     ArrayList<Author> test = new ArrayList<>();
     Author newAuthor = new Author("Ismail", "Kadare");
     test.add(newAuthor);
+    ArrayList<Author> actualSearchResults1 = Author.getSearchResults("Ismail Kadare");
+    if(actualSearchResults1.isEmpty())
+    {
+      newAuthor.saveInFile();
+    }
     ArrayList<Author> actualSearchResults = Author.getSearchResults("Ismail Kadare");
     assertEquals(test.toString(), actualSearchResults.toString());
     System.out.println(actualSearchResults);
@@ -32,11 +37,6 @@ class AuthorTest {
     assertTrue(actualSearchResults.isEmpty());
   }
 
-  @Test
-  void testGetSearchResults4() {
-    ArrayList<Author> actualSearchResults = Author.getSearchResults("Ismail Kadare");
-    assertEquals(1, actualSearchResults.size());
-  }
 
   @Test
   void testSetFirstName() {

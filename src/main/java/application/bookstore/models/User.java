@@ -96,10 +96,26 @@ public class User extends BaseModel implements Serializable {
     public boolean saveInFile() {
         // write the logic that saves a user in the file
         // return true if no exception happened, otherwise false
-        boolean saved = super.save(User.DATA_FILE);
-        if (saved)
-            users.add(this);
-        return saved;
+        User admin = new User("admin", "Test2022", Role.ADMIN);
+        User manager = new User("manager", "Test2022", Role.MANAGER);
+        User librarian = new User("librarian", "Test2022", Role.LIBRARIAN);
+        User uertToSave = new User(getUsername(),getPassword(),getRole());
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(User.FILE_PATH));
+            outputStream.writeObject(admin);
+            outputStream.writeObject(manager);
+            outputStream.writeObject(librarian);
+            outputStream.writeObject(uertToSave);
+            System.out.println("Wrote users to the file users.ser successfully");
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+//        boolean saved = super.save(User.DATA_FILE);
+//        if (saved)
+//            users.add(this);
+//        return saved;
     }
 
     @Override

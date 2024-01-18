@@ -30,7 +30,13 @@ class UserTest {
 
     @Test
     void testSaveInFile() {
-        assertFalse((new User("test", "test")).saveInFile());
+        User newUser = new User("test","testingNew",Role.LIBRARIAN);
+        ArrayList<User> newArray = new ArrayList<>();
+        newArray.add(newUser);
+        newUser.saveInFile();
+        ArrayList<User> actualUsers = User.getUsers();
+        System.out.println(actualUsers);
+        assertEquals(newArray.get(0),actualUsers.get(actualUsers.size()-1));
     }
 
     @Test

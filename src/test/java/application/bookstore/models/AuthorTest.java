@@ -67,6 +67,8 @@ class AuthorTest {
   void testSaveInFile() {
     Author test = new Author("testSave", "LastNameTest");
     assertTrue(test.saveInFile());
+    ArrayList<Author> actualSearchResults = Author.getSearchResults("testSave LastNameTest");
+    assertTrue(!actualSearchResults.isEmpty());
     assertFalse((new Author("test", "")).saveInFile());
   }
 
@@ -97,7 +99,9 @@ class AuthorTest {
 
   @Test
   void testDeleteFromFile2() {
-    (new Author("testDelete", "testDelete")).deleteFromFile();
+    Author newAuthor = new Author("testDelete", "testDelete");
+    newAuthor.saveInFile();
+    newAuthor.deleteFromFile();
     ArrayList<Author> actualSearchResults = Author.getSearchResults("testDelete testDelete");
     assertTrue(actualSearchResults.isEmpty());
   }
